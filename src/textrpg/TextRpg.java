@@ -11,7 +11,13 @@ public class TextRPG {
 		return instance;
 	}
 
+	private boolean isRun = true;
+	
 	public void run() {
+		GameManager.instance.init();
+		while(isRun) {
+			isRun = GameManager.instance.changeStage();
+		}
 	}
 
 }
