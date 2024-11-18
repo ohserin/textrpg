@@ -19,7 +19,12 @@ public class GameManager {
 		return instance;
 	}
 
+	
 	private static String nextStage;
+	
+	public static String getNextStage() {
+		return nextStage;
+	}
 
 	public static void setNextStage(String stage) {
 		nextStage = stage;
@@ -31,6 +36,7 @@ public class GameManager {
 	public void init() {
 		stageList.put("START", new StageStart());
 		stageList.put("LOBBY", new StageLobby());
+		stageList.put("BATTLE", new StageBattle());
 		nextStage = "START";
 	}
 
@@ -54,10 +60,10 @@ public class GameManager {
 		Stage stage = stageList.get(curStage);
 		stage.init();
 
-		boolean isRun = true;
-		while (isRun) {
-			isRun = stage.update();
-			if (isRun == false)
+		boolean isUpdate = true;
+		while (isUpdate) {
+			isUpdate = stage.update();
+			if (isUpdate == false)
 				break;
 		}
 

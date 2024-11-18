@@ -17,6 +17,7 @@ public class TextRPG {
 		GameManager.instance.init();
 		while(isRun) {
 			isRun = GameManager.instance.changeStage();
+			break;
 		}
 	}
 
