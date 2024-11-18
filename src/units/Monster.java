@@ -31,6 +31,10 @@ public abstract class Monster {
 		this.maxHp = hp;
 		this.power = att;
 	}
+	
+	public int getCurHp() {
+		return this.curHp;
+	}
 
 	public void attack(Unit target) {
 		target.hp -= (power - target.defense);

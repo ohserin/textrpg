@@ -20,6 +20,22 @@ public abstract class Unit {
 
 	protected BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
 
+	public Unit() {
+
+	}
+
+	public int getHp() {
+		return this.hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+	
+	public String getName() {
+		return this.name;
+	}
+
 	public Unit(String name, int level, int hp, int att, int def, int exp) {
 		this.name = name;
 		this.level = level;
