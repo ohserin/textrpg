@@ -30,6 +30,7 @@ public class GameManager {
 
 	public void init() {
 		stageList.put("START", new StageStart());
+		stageList.put("LOBBY", new StageLobby());
 		nextStage = "START";
 	}
 

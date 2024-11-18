@@ -7,7 +7,7 @@ public class StageStart extends Stage {
 	@Override
 	public boolean update() {
 		try {
-			writer.write("== 🛡️ TEST RPG 🛡️ ==\n");
+			writer.write("== 🛡️ TEXT RPG 🛡️ ==\n");
 			writer.write("★★★ GAME PLAY ★★★\n");
 			writer.write("시작을 입력하세요 : \n");
 			writer.flush();
