@@ -41,6 +41,7 @@ public class StageBattle extends Stage {
 
 		while (run) {
 			if (turn) {
+				printCharacter();
 				if (pIdx < Player.getGuildSize()) {
 					playerAttack(pIdx);
 					pIdx += 1;
@@ -86,20 +87,29 @@ public class StageBattle extends Stage {
 	}
 
 	public void monsterAttack(int index) {
-
+		Monster monster = monsterList.get(index);
+		if(monster.getCurHp() <= 0)
+			return;
+		while(true) {
+			int idx = ran.nextInt(Player.getGuildSize());
+			if(Player.getGuildUnit(idx).getHp() > 0) {
+				monster.attack(Player.getGuildUnit(idx));
+				break;
+			}
+		}
 	}
 
 	public void printCharacter() {
 		try {
-			writer.write("[BATTLE]");
-			writer.write(String.format("%d : %d", playersDead, monstersDead));
-			writer.write("[PLATER]");
+			writer.write("[BATTLE]\n");
+			writer.write(String.format("⚜%d : %d⚜\n", playersDead, monstersDead));
+			writer.write("[PLATER]\n");
 			for(int i = 0; i < Player.getGuildSize(); i++) {
 				Player.getGuildUnit(i).printData();
 			}
-			writer.write("[MONSTER]");
+			writer.write("[MONSTER]\n");
 			for(int i = 0; i < monsterList.size(); i++) {
-			
+			monsterList.get(i).printData();
 			}
 			writer.flush();
 		} catch (IOException e) {
