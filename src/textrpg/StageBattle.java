@@ -38,7 +38,6 @@ public class StageBattle extends Stage {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		while (run) {
 			if (turn) {
 				printCharacter();
@@ -70,8 +69,8 @@ public class StageBattle extends Stage {
 	public void init() {
 		um.getMonsterList().clear();
 		um.generateMonsters(4);
-		um.player = null;
 		um.player = new Player();
+		um.player.init();
 		monsterList = null;
 		monsterList = um.monList;
 		monstersDead = monsterList.size();
@@ -82,7 +81,7 @@ public class StageBattle extends Stage {
 		try {
 			writer.write("[BATTLE]\n");
 			writer.write(String.format("⚜%d : %d⚜\n", playersDead, monstersDead));
-			writer.write("[PLATER]\n");
+			writer.write("[PLAYER]\n");
 			for (int i = 0; i < Player.getGuildSize(); i++) {
 				Player.getGuildUnit(i).printData();
 			}
@@ -134,7 +133,7 @@ public class StageBattle extends Stage {
 			if (Player.getGuildUnit(idx).getHp() > 0) {
 				try {
 					monster.attack(Player.getGuildUnit(idx));
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				break;

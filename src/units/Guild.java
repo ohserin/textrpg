@@ -66,12 +66,14 @@ public class Guild {
 	}
 
 	public void printUnitStaus(int selUnit) {
-//		guildList.get(selUnit).printStatus;
+		guildList.get(selUnit).printStatus();
 	}
 
 	public void printUnitItem(int selUnit) {
 
 	}
+	
+
 
 	public void guildMenu() {
 		while (true) {
