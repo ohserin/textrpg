@@ -27,11 +27,15 @@ public abstract class Unit {
 	public int getHp() {
 		return this.hp;
 	}
+	
+	public int getDefense() {
+		return this.defense;
+	}
 
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
-	
+
 	public String getName() {
 		return this.name;
 	}
@@ -66,9 +70,9 @@ public abstract class Unit {
 	}
 
 	public void setItem(Item weapon, Item armor, Item trinkets) {
-		weapon = weapon;
-		armor = armor;
-		trinkets = trinkets;
+		this.weapon = weapon;
+		this.armor = armor;
+		this.trinkets = trinkets;
 	}
 
 	public void attack(Monster target) {

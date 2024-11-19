@@ -16,12 +16,12 @@ public class UnitManager {
 	}
 
 	private ArrayList<Player> playerList = new ArrayList<Player>();
-	private ArrayList<Monster> monList = new ArrayList<>();
-	private String packageName = "";
-	private String[] monsterTypes = { "DeathKnight", "Vampire", "FleshGolem" };
+	public ArrayList<Monster> monList = new ArrayList<>();
+	private String packageName = "units.";
+	private String[] monsters = { "DeathKnight", "Vampire", "FleshGolem" };
 
 	private Random random = new Random();
-	private Player player = new Player();
+	public Player player = new Player();
 
 	public void init() {
 		player.init();
@@ -29,8 +29,8 @@ public class UnitManager {
 
 	public void generateMonsters(int size) {
 		for (int i = 0; i < size; i++) {
-			int rIdx = random.nextInt(monsterTypes.length);
-			String monsterClassName = packageName + monsterTypes[rIdx];
+			int rNum = random.nextInt(monsters.length);
+			String monsterClassName = packageName + monsters[rNum];
 
 			try {
 				Class<?> clazz = Class.forName(monsterClassName);
@@ -48,6 +48,10 @@ public class UnitManager {
 		}
 	}
 
+	public Player getPlayer() {
+		return player;
+	}
+
 	public List<Player> getPlayerList() {
 		return playerList;
 	}
@@ -56,4 +60,7 @@ public class UnitManager {
 		return monList;
 	}
 
+	public void setPlayer(Player newPlayer) {
+		this.player = newPlayer;
+	}
 }

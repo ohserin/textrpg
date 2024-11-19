@@ -7,7 +7,7 @@ public class Player extends Unit {
 	public static Guild guild = new Guild();
 //	public static Inventory inven=new Inventory();
 
-	Player() {
+	public Player() {
 
 	}
 

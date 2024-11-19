@@ -14,14 +14,14 @@ public class StageBattle extends Stage {
 	private final int ATTACK = 1;
 	private final int SKILL = 2;
 
-	UnitManager unitManager = null;
+	UnitManager um = null;
 	ArrayList<Monster> monsterList = new ArrayList<>();
 	Random ran = new Random();
 	int monstersDead = 0;
 	int playersDead = 0;
 
 	public StageBattle() {
-		unitManager = UnitManager.getInstance();
+		um = UnitManager.getInstance();
 		ran = new Random();
 	}
 
@@ -49,54 +49,33 @@ public class StageBattle extends Stage {
 					turn = !turn;
 					pIdx = 0;
 				}
-			} else {
+			} else if (!turn) {
 				if (mIdx < monsterList.size()) {
 					monsterAttack(mIdx);
 					mIdx += 1;
 				} else {
-
 					turn = !turn;
 					mIdx = 0;
 				}
 			}
-
-			if (monstersDead >= monsterList.size()) {
-				run = false;
-				try {
-					writer.write("🎉 모든 몬스터를 처치하였습니다! 🎉");
-					writer.flush();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			} else if (playersDead >= Player.getGuildSize()) {
-				run = false;
-				try {
-					writer.write("💀 패배! 모든 플레이어가 처치당하였습니다. 💀");
-					writer.flush();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+			checkLive();
+			if (monstersDead <= 0 || playersDead <= 0)
+				break;
 		}
+		GameManager.setNextStage("LOBBY");
 		return false;
 	}
 
 	@Override
 	public void init() {
-
-	}
-
-	public void monsterAttack(int index) {
-		Monster monster = monsterList.get(index);
-		if(monster.getCurHp() <= 0)
-			return;
-		while(true) {
-			int idx = ran.nextInt(Player.getGuildSize());
-			if(Player.getGuildUnit(idx).getHp() > 0) {
-				monster.attack(Player.getGuildUnit(idx));
-				break;
-			}
-		}
+		um.getMonsterList().clear();
+		um.generateMonsters(4);
+		um.player = null;
+		um.player = new Player();
+		monsterList = null;
+		monsterList = um.monList;
+		monstersDead = monsterList.size();
+		playersDead = Player.getGuildSize();
 	}
 
 	public void printCharacter() {
@@ -104,12 +83,12 @@ public class StageBattle extends Stage {
 			writer.write("[BATTLE]\n");
 			writer.write(String.format("⚜%d : %d⚜\n", playersDead, monstersDead));
 			writer.write("[PLATER]\n");
-			for(int i = 0; i < Player.getGuildSize(); i++) {
+			for (int i = 0; i < Player.getGuildSize(); i++) {
 				Player.getGuildUnit(i).printData();
 			}
 			writer.write("[MONSTER]\n");
-			for(int i = 0; i < monsterList.size(); i++) {
-			monsterList.get(i).printData();
+			for (int i = 0; i < monsterList.size(); i++) {
+				monsterList.get(i).printData();
 			}
 			writer.flush();
 		} catch (IOException e) {
@@ -120,8 +99,8 @@ public class StageBattle extends Stage {
 	public void playerAttack(int index) {
 		Player player = Player.getGuildUnit(index);
 
-//		if (player.getHp() <= 0)
-//			return;
+		if (player.getHp() <= 0)
+			return;
 
 		try {
 			writer.write("📜 [메뉴 선택] 📜");
@@ -144,6 +123,41 @@ public class StageBattle extends Stage {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void monsterAttack(int index) {
+		Monster monster = monsterList.get(index);
+		if (monster.getCurHp() <= 0)
+			return;
+		while (true) {
+			int idx = ran.nextInt(Player.getGuildSize());
+			if (Player.getGuildUnit(idx).getHp() > 0) {
+				try {
+					monster.attack(Player.getGuildUnit(idx));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+	}
+
+	public void checkLive() {
+		int num = 0;
+		for (int i = 0; i < Player.getGuildSize(); i++) {
+			if (Player.getGuildUnit(i).getHp() <= 0) {
+				num += 1;
+			}
+		}
+		playersDead = Player.getGuildSize() - num;
+
+		num = 0;
+		for (int i = 0; i < monsterList.size(); i++) {
+			if (monsterList.get(i).getCurHp() <= 0) {
+				num += 1;
+			}
+		}
+		monstersDead = monsterList.size() - num;
 	}
 
 }
