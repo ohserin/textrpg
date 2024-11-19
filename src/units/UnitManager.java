@@ -36,8 +36,8 @@ public class UnitManager {
 				Class<?> clazz = Class.forName(monsterClassName);
 				Monster monster = (Monster) clazz.getDeclaredConstructor().newInstance();
 
-				int hp = random.nextInt(100) + 100;
-				int attPower = random.nextInt(10) + 10;
+				int hp = random.nextInt(100) + 200;
+				int attPower = random.nextInt(40) + 20;
 				monster.init(hp, attPower);
 
 				monList.add(monster);

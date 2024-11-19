@@ -23,9 +23,9 @@ public class Guild {
 	}
 
 	public void setGuild() {
-		guildList.add(new Player("전사", 5, 1000, 45, 45, 0));
-		guildList.add(new Player("궁수", 8, 700, 65, 45, 0));
-		guildList.add(new Player("마법사", 3, 500, 75, 35, 0));
+		guildList.add(new Player("전사", 5, 1000, 35, 15, 0));
+		guildList.add(new Player("궁수", 8, 700, 15, 15, 0));
+		guildList.add(new Player("마법사", 3, 500, 20, 10, 0));
 
 		for (int i = 0; i < SIZE; i++) {
 			guildList.get(i).party = true;
@@ -72,8 +72,6 @@ public class Guild {
 	public void printUnitItem(int selUnit) {
 
 	}
-	
-
 
 	public void guildMenu() {
 		while (true) {
@@ -246,6 +244,10 @@ public class Guild {
 				}
 			}
 		}
+	}
+
+	public void clear() {
+		guildList.clear();
 	}
 
 }

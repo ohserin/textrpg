@@ -27,10 +27,6 @@ public abstract class Unit {
 	public int getHp() {
 		return this.hp;
 	}
-	
-	public int getDefense() {
-		return this.defense;
-	}
 
 	public void setHp(int hp) {
 		this.hp = hp;
@@ -74,13 +70,14 @@ public abstract class Unit {
 		this.armor = armor;
 		this.trinkets = trinkets;
 	}
-	
-	public void printStatus() {}
+
+	public void printStatus() {
+	}
 
 	public void attack(Monster target) {
 		target.curHp -= attack;
 		try {
-			writer.write(String.format("%s가 %s에게 %d의 데미지를 입혔습니다!\n", name, target.name, attack));
+			writer.write(String.format("%s가 %s에게 %2d의 데미지를 입혔습니다!\n", name, target.name, attack));
 			writer.flush();
 			if (target.curHp <= 0) {
 				writer.write(String.format("%s을(를) 처치했습니다.\n", target.name));
@@ -94,7 +91,7 @@ public abstract class Unit {
 
 	public void printData() {
 		try {
-			writer.write(String.format("[%3s]  Hp:[%3d / %3d] Power:[%2d]\n", name, hp, maxHp, attack));
+			writer.write(String.format("[%3s]  Hp:[%4d / %4d] Power:[%2d]\n", name, hp, maxHp, attack));
 			writer.flush();
 		} catch (IOException e) {
 			e.printStackTrace();

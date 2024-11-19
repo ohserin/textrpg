@@ -31,14 +31,15 @@ public abstract class Monster {
 	}
 
 	public void attack(Unit target) {
-		int damage = power - target.getDefense();
+		int damage = power - target.defense;
 		target.setHp(target.getHp() - damage);
+
 
 		try {
 			writer.write("👊");
-			writer.write(String.format("%s가 %s에게 %d만큼의 데미지를 입혔습니다\n", name, target.getName(), damage));
+			writer.write(String.format("%s가 %s에게 %2d만큼의 데미지를 입혔습니다!\n", name, target.getName(), damage));
 			if (target.getHp() <= 0) {
-				writer.write(String.format("%s를 처치했습니다.\n", target.getName()));
+				writer.write(String.format("%s가 전투불능 상태입니다.\n", target.getName()));
 				target.setHp(0);
 			}
 			writer.flush();

@@ -69,8 +69,8 @@ public class StageBattle extends Stage {
 	public void init() {
 		um.getMonsterList().clear();
 		um.generateMonsters(4);
-		um.player = new Player();
 		um.player.init();
+		um.player = new Player();
 		monsterList = null;
 		monsterList = um.monList;
 		monstersDead = monsterList.size();
@@ -81,11 +81,15 @@ public class StageBattle extends Stage {
 		try {
 			writer.write("[BATTLE]\n");
 			writer.write(String.format("⚜%d : %d⚜\n", playersDead, monstersDead));
+
 			writer.write("[PLAYER]\n");
+			writer.flush();
 			for (int i = 0; i < Player.getGuildSize(); i++) {
 				Player.getGuildUnit(i).printData();
 			}
+
 			writer.write("[MONSTER]\n");
+			writer.flush();
 			for (int i = 0; i < monsterList.size(); i++) {
 				monsterList.get(i).printData();
 			}
@@ -102,8 +106,8 @@ public class StageBattle extends Stage {
 			return;
 
 		try {
-			writer.write("📜 [메뉴 선택] 📜");
-			writer.write(String.format("[%s] [1.어택] [2.스킬]", player.getName()));
+			writer.write("📜 [메뉴 선택] 📜\n");
+			writer.write(String.format("🎲[%s]의 차례입니다.\n [1.어택]", player.getName()));
 			writer.flush();
 
 			String input = reader.readLine();
@@ -117,7 +121,6 @@ public class StageBattle extends Stage {
 						break;
 					}
 				}
-			} else if (sel == SKILL) {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

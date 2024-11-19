@@ -21,6 +21,7 @@ public class Player extends Unit {
 
 	public void init() {
 		money = 100000;
+		guild.clear();
 		guild.setGuild();
 	}
 

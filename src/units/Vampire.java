@@ -3,7 +3,7 @@ package units;
 public class Vampire extends Monster {
 
 	public Vampire() {
-		super("🧛‍♂️", 100, 10);
+		super("🧛‍♂️", 100, 30);
 	}
 
 	public Vampire(String name, int hp, int att) {
