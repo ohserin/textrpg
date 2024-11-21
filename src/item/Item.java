@@ -1,4 +1,4 @@
-package units;
+package item;
 
 public class Item {
 	private final int WEAPON = 1;

@@ -2,7 +2,12 @@ package textrpg;
 
 import java.io.IOException;
 
+
 public class StageLobby extends Stage {
+
+	private final int EMPTY = 0;
+	private final int BATTLE = 1;
+	private final int SETTING = 2;
 
 	@Override
 	public boolean update() {
@@ -17,18 +22,19 @@ public class StageLobby extends Stage {
 			try {
 				int sel = Integer.parseInt(input);
 
-				if (sel > 2 || sel < 0) {
+				if (sel > SETTING || sel < EMPTY) {
 					writer.write("없는 메뉴입니다.\n");
 					writer.flush();
 					return true;
 				}
 
-				if (sel == 1) {
+				if (sel == BATTLE) {
 					GameManager.setNextStage("BATTLE");
 					GameManager.getInstance().changeStage();
-				} else if (sel == 2) {
+				} else if (sel == SETTING) {
 					GameManager.setNextStage("SETTINGS");
-				} else if (sel == 0) {
+					GameManager.getInstance().changeStage();
+				} else if (sel == EMPTY) {
 					writer.write("게임을 종료합니다.");
 					writer.flush();
 					return false;

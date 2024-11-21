@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+import item.Item;
+
 public abstract class Unit {
 	protected String name;
 	protected int level;

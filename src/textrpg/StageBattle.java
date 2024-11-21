@@ -12,7 +12,6 @@ public class StageBattle extends Stage {
 
 	private final int EMPTY = 0;
 	private final int ATTACK = 1;
-	private final int SKILL = 2;
 
 	UnitManager um = null;
 	ArrayList<Monster> monsterList = new ArrayList<>();

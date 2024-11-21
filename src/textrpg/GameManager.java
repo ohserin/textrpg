@@ -19,9 +19,8 @@ public class GameManager {
 		return instance;
 	}
 
-	
-	private static String nextStage;
-	
+	public static String nextStage;
+
 	public static String getNextStage() {
 		return nextStage;
 	}
@@ -37,6 +36,7 @@ public class GameManager {
 		stageList.put("START", new StageStart());
 		stageList.put("LOBBY", new StageLobby());
 		stageList.put("BATTLE", new StageBattle());
+		stageList.put("SETTING", new StageSetting());
 		nextStage = "START";
 	}
 
